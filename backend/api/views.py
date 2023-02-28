@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import views, authentication, status
 from rest_framework.response import Response
+from rest_framework.decorators import api_view, permission_classes
 from account.models import User
 from .serializers import UserSerializer, EventSerializer
 from events.models import Event
@@ -63,7 +64,55 @@ class EventDetailView(views.APIView):
     
 
 
+# Views in Function Based way
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_item(request, pk):
+    event = get_object_or_404(Event, pk=pk)
+    event.delete()
+    return Response(status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_event(request, pk):
+    event = get_object_or_404(Event, pk=pk)
+    return Response(EventSerializer(event).data)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def create_event(request):
+    if request.method == 'POST':
+        serializer = EventSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+@api_view(['POST'])
+def events_list(request):
+    events = Event.objects.all()
+    serializer = EventSerializer(events, many=True)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def udpate_event(request, pk):
+    event = get_object_or_404(Event, pk=pk)
+    serializer = EventSerializer(event, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+
+
+
+
 
 # # Generic Views
 # class EventList(ListAPIView):
