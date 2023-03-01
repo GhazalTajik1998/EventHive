@@ -1,11 +1,12 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import get_user_model
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, GenericAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import views, authentication, status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
+from rest_framework.mixins import ListModelMixin, CreateModelMixin
 from account.models import User
 from .serializers import UserSerializer, EventSerializer
 from events.models import Event
@@ -18,13 +19,14 @@ class UserListView(ListAPIView):
 
 
 # Viewsets for Event
-# class EventViewSet(ModelViewSet):
-#     queryset = Event.objects.all()
-#     serializer_class = EventSerializer
+class EventModelViewSet(ModelViewSet):
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
 
 
 
 # Using APIView 
+
 class EventList(views.APIView):
     # auhtentication_classes = [authentication.TokenAuthentication]
     # serializer_class = EventSerializer
@@ -114,7 +116,16 @@ def udpate_event(request, pk):
 
 
 
-# # Generic Views
-# class EventList(ListAPIView):
-#     queryset = Event.objects.all()
-#     serializer_class = EventSerializer
+# Generic Views
+class EventListGenric(ListModelMixin, CreateModelMixin, GenericAPIView):
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+    
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+    
+
+    
