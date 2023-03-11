@@ -9,14 +9,14 @@ from events.models import Event
 
 class UserSerializer(ModelSerializer):
     # Attach method to field for displaying
-    full_name = serializers.CharField(source='get_full_name')
+    # full_name = serializers.CharField(source='get_full_name', required=False)
     class Meta: 
         model = get_user_model()
         fields = "__all__"
 
 
 class EventSerializer(ModelSerializer):
-    
+
     # Change the fields name for displaying
     # start = serializers.DateTimeField(source='start_date')
 
@@ -48,3 +48,4 @@ class EventSerializer(ModelSerializer):
                 "username" : obj.user.username,
                 "first_name" : obj.user.first_name,
             }
+    
