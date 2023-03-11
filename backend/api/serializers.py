@@ -48,4 +48,5 @@ class EventSerializer(ModelSerializer):
                 "username" : obj.user.username,
                 "first_name" : obj.user.first_name,
             }
+
     

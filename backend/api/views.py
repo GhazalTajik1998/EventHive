@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import get_user_model
 from rest_framework.generics import ListAPIView, GenericAPIView
+from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import views, authentication, status
@@ -72,6 +73,9 @@ class EventDetailView(views.APIView):
     
 
 
+
+
+
 # Views in Function Based way
 
 @api_view(['DELETE'])
@@ -117,11 +121,6 @@ def udpate_event(request, pk):
 
 
 
-
-
-
-
-
 # Generic Views
 class EventListGenric(ListModelMixin, CreateModelMixin, GenericAPIView):
     queryset = Event.objects.all()
@@ -134,4 +133,25 @@ class EventListGenric(ListModelMixin, CreateModelMixin, GenericAPIView):
         return self.list(request, *args, **kwargs)
     
 
+
+
+# ----------------------------------------------------------------------------------- #
+
+class ReserveEvent(APIView):
+    permission_classes = [IsAuthenticated]
+    def post(self, request, pk):
+        event = get_object_or_404(Event, pk=pk)
+        event.subscriptions.add(request.user)
+        serializer = EventSerializer(event)
+        return Response(serializer.data)
     
+
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def remove_subscription(request, pk):
+
+    event = get_object_or_404(Event, pk=pk)
+    event.subscriptions.remove(request.user)
+    serializer = EventSerializer(event)
+    return Response(serializer.data)
