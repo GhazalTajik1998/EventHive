@@ -20,16 +20,11 @@ class UserModelViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
 
 
-<<<<<<< HEAD
-    
-
-=======
 # Viewsets for Event
 class EventModelViewSet(ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
     permission_classes = [AuthorOrReadOnly]
->>>>>>> events
 
     def perform_create(self, serializer):
         user = self.request.user
