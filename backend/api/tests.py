@@ -16,3 +16,6 @@ class UserListAPIViewTestCase(TestCase):
 
 
         self.assertEqual(model.username, 'test')
+
+
+
