@@ -12,7 +12,12 @@ class UserSerializer(ModelSerializer):
     # full_name = serializers.CharField(source='get_full_name', required=False)
     class Meta: 
         model = get_user_model()
-        fields = "__all__"
+        fields = ["id", 
+                  "username", 
+                  "first_name", 
+                  "last_name", 
+                  "email",
+                  ]
 
 
 class EventSerializer(ModelSerializer):

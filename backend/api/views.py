@@ -10,14 +10,14 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.mixins import ListModelMixin, CreateModelMixin
 from account.models import User
 from .serializers import UserSerializer, EventSerializer
-from .permissions import AuthorOrReadOnly
+from .permissions import AuthorOrReadOnly, UserOrReadOnly
 from events.models import Event
 
 # Create your views here.
 class UserModelViewSet(ModelViewSet):
     queryset = get_user_model().objects.all()
     serializer_class =  UserSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [UserOrReadOnly, IsAuthenticated]
 
 
 # Viewsets for Event
