@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.test import TestCase
 from rest_framework.test import APITestCase
 
@@ -16,6 +17,3 @@ class UserListAPIViewTestCase(TestCase):
 
 
         self.assertEqual(model.username, 'test')
-
-
-
