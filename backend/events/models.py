@@ -13,7 +13,7 @@ class Event(models.Model):
     description = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=10, decimal_places=3)
     capacity = models.IntegerField(null=True, blank=True)
-    subscriptions = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='user_events',)
+    subscriptions = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='user_events', blank=True)
     created = models.DateTimeField(editable=False)
     updated = models.DateTimeField(editable=False)
 

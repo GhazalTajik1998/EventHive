@@ -41,11 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'api.apps.ApiConfig',
-<<<<<<< HEAD
     'events.apps.EventsConfig'
-=======
-
->>>>>>> testing
 ]
 
 MIDDLEWARE = [

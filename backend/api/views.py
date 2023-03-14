@@ -25,6 +25,7 @@ class EventModelViewSet(ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
     permission_classes = [AuthorOrReadOnly]
+    
 
     def perform_create(self, serializer):
         user = self.request.user
