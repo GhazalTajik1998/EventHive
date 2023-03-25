@@ -6,8 +6,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import views, authentication, status
 from rest_framework.response import Response
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, action
 from rest_framework.mixins import ListModelMixin, CreateModelMixin
+
 from account.models import User
 from .serializers import UserSerializer, EventSerializer
 from .permissions import AuthorOrReadOnly, UserOrReadOnly
@@ -19,6 +20,13 @@ class UserModelViewSet(ModelViewSet):
     serializer_class =  UserSerializer
     permission_classes = [UserOrReadOnly, IsAuthenticated]
 
+    @action(detail=True, methods=['get'])
+    def reserved_events(self, request, pk):
+        user = get_object_or_404(get_user_model(), pk=pk)
+        queryset = Event.objects.filter(subscriptions=user)
+        serializer = EventSerializer(queryset, many=True)
+        return Response(serializer.data)
+    
 
 # Viewsets for Event
 class EventModelViewSet(ModelViewSet):
@@ -34,7 +42,6 @@ class EventModelViewSet(ModelViewSet):
 
 
 # Using APIView 
-
 class EventList(views.APIView):
     # auhtentication_classes = [authentication.TokenAuthentication]
     # serializer_class = EventSerializer
