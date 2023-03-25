@@ -14,6 +14,8 @@ from .serializers import UserSerializer, EventSerializer
 from .permissions import AuthorOrReadOnly, UserOrReadOnly
 from events.models import Event
 
+
+
 # Create your views here.
 class UserModelViewSet(ModelViewSet):
     queryset = get_user_model().objects.all()
