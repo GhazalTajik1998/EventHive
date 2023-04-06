@@ -12,6 +12,7 @@ from rest_framework.mixins import ListModelMixin, CreateModelMixin
 from account.models import User
 from .serializers import UserSerializer, EventSerializer
 from .permissions import AuthorOrReadOnly, UserOrReadOnly
+from .tasks import event_reserved
 from events.models import Event
 
 
@@ -152,6 +153,7 @@ class ReserveEvent(APIView):
     def post(self, request, pk):
         event = get_object_or_404(Event, pk=pk)
         event.subscriptions.add(request.user)
+        event_reserved.delay(event.id)
         serializer = EventSerializer(event)
         return Response(serializer.data)
     
