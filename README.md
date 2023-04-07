@@ -5,7 +5,7 @@
 ## Features
 
 - Email notifications: The API integrates with Celery and RabbitMQ to send email notifications to attendees when an event is created or updated. This feature makes it easy to keep attendees informed about any changes or updates to the event.
-- Event reminders: **Project Name** sends reminders to attendees as the event time approaches, ensuring that attendees don't miss important events.
+- Event reminders: **EventHive** sends reminders to attendees as the event time approaches, ensuring that attendees don't miss important events.
 - Authentication: The API supports different authentication approaches, including JWT, token-based, and session authentication. This feature provides users with a range of options to authenticate with the API.
 - Comprehensive documentation: **Project Name** includes a comprehensive API documentation using `drf_spectacular` and Swagger. This documentation makes it easy for developers to understand the API's features and functionality.
 - Testing: The API includes tests for all parts of the API, ensuring that the API is reliable and functions as expected.
