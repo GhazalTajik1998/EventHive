@@ -9,45 +9,46 @@ This guide provides instructions for installing and setting up the Project Name 
 
 ## Installation
 1. Clone the repository:
-`` bash:
+``` bash:
 git clone https://github.com/ghazaltajik1998/EventHive.git
-
+```
 2. Change to the project directory:
-`` bash:
+``` bash:
 cd EventHive
-
+```
 3. Create a virtual enviroment:
-`` bash:
+``` bash:
 python -m venv venv
-
+```
 4. Activate the virtual enviroment:
 - On macOS/Linux:
-    `` bash:
+    ``` bash:
     source venv/bin/activate
+    ```
 - On Windows:
-`` bash:
+``` bash:
 venv\Scripts\activate.bat
-
+```
 5. Install the dependencies:
-`` bash:
+``` bash:
 pip install -r requirements.txt
-
+```
 6. Run the database migrations:
-`` bash:
+``` bash:
 python manage.py migrate
-
+```
 7. Start the RabbitMQ service:
-`` sql:
+``` sql:
 sudo systemctl start rabbitmq-server
-
+```
 8. Start the Celery worker :
-`` bash:
+``` bash:
 celery -A backend worker --loglevel=INFO -P eventlet
-
+```
 9. Start the development server:
-`` bash:
+``` bash:
 python manage.py runserver
-
+```
 
 
 ## Usage
@@ -55,7 +56,7 @@ Once the API is set up and running, you can access it at http://localhost:8000. 
 
 ## Testing
 To run the tests included in the project, run :
-`` bash:
+``` bash:
 python manage.py test
-
+```
 
