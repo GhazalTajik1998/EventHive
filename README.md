@@ -1,8 +1,7 @@
 # EventHive
 **EventHive** is a REST API that allows users to create and join events.In this project tried to use different concepts and technologies.
-
-## Description
-With **EventHive**, users can easily organize and manage events, invite others to attend, and keep track of attendance.
+ With **EventHive**, users can easily organize and manage events, invite others to attend, and keep track of attendance. The API was built with scalability and reliability in mind, using the latest technologies and best practices to ensure fast and efficient performance.
+ 
 ## Features
 
 - Email notifications: The API integrates with Celery and RabbitMQ to send email notifications to attendees when an event is created or updated. This feature makes it easy to keep attendees informed about any changes or updates to the event.
