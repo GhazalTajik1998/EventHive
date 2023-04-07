@@ -1,3 +1,4 @@
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/Django)
 # EventHive
 **EventHive** is a REST API that allows users to create and join events.In this project tried to use different concepts and technologies.
  With **EventHive**, users can easily organize and manage events, invite others to attend, and keep track of attendance. The API was built with scalability and reliability in mind, using the latest technologies and best practices to ensure fast and efficient performance.
